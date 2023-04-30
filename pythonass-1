@@ -1,0 +1,39 @@
+##########
+1)Description - Create a small command-line program in Python to calculate the total invoice amount for the below purchases - 
+Book - Introduction to Python Programming : Rs 499.00
+Book - Python Libraries Cookbook : Rs. 855.00
+Book - Data Science in Python : Rs. 645.00
+Taxes and additional charges are described as details - 
+GST : 12%
+Delivery Charges : Rs. 250.00
+
+********************************output:***************************************************************************
+pybook = float(input("enter pybook cost:"))
+pycookbook = float(input("enter pycook cost:"))
+dsbook = float(input("enter dsbook cost:"))
+total = pybook + pycookbook + dsbook
+gst=0.12
+delivery = float(input("enter delivery cost:"))
+tax = total * gst
+totalamountinvoice = total + tax + delivery
+print("the total amount of all different books are = ",totalamountinvoice)
+#######################################################################################################################
+2)Write a program in Python to print the number of unique letters in a string. Only new letters from the string should be counted and not duplicates.
+Input : string1 = "India"
+Output : uniqueLetters = i,n,d,a
+Input : string1 = "Dedication"
+Output : uniqueLetters = d,e,i,c,a,t,o,n
+********************output********************************************************************************************
+l=input("enter string: ")
+str=l.lower()
+l1=[]
+count=0
+for b in str:
+    if b  not in l1:
+        count=count+1
+        l1.append(b)
+print("unquieletters= ",end="")
+for a in l1:
+    print(a,end=",")
+
+
