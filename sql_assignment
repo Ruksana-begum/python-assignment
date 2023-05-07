@@ -1,0 +1,125 @@
+========================================================================================
+create database online_consul1;
+
+create table Doctor(id  int primary key not null,
+name varchar(30) not null,specialization varchar(20) not null);
+
+select * FROM Doctor;
+
+ INSERT INTO Doctor VALUES (102,"sai","cardiology");
+  INSERT INTO Doctor VALUES (103,"pavan","neurology");
+ INSERT INTO Doctor VALUES (104,"suman","babyspl");
+ INSERT INTO Doctor VALUES (105,"jeeva","gyaneco");
+ INSERT INTO Doctor VALUES (106,"karan","anesthia");
+ INSERT INTO Doctor VALUES (107,"viswa","bones");
+ INSERT INTO Doctor VALUES (108,"uday","psychology");
+ 
+
+ create table Appointment1( 
+doctor_name varchar(30) not null,patient_name varchar(20) not null, ti_me time);
+
+ select * from Appointment1;
+ 
+ INSERT INTO Appointment1 VALUES ("sai","priya",'10:00:00'),
+  ("pavan","meena",'1:00:00'),
+  ("suman","geetha",'4:00:00'),
+  ("jeeva","swetha",'10:45:00'),
+  ("karan","ziya",'03:30:00'),
+  ("viswa","ruhi",'12:45:00'),
+  ("uday","piyu",'02:50:00');
+ 
+ select doctor_name,patient_name from appointment1 where ti_me='10:45:00';
+drop table appointment1;
+
+create table patient( 
+patient_name varchar(30) not null,gender varchar(20) not null, age int);
+
+ INSERT INTO patient VALUES ('priya',"F",24),
+ ('meena',"F",10),
+ ('geetha',"F",16),
+ ('swetha',"F",9),
+ ('ziya',"F",44),
+ ('ruhi',"F",22),
+ ('piyu',"F",18);
+
+select* from patient;
+
+select gender,age from patient where patient_name="meena";
+
+create table review1( 
+doctor_name varchar(30) not null,patient_name varchar(20) not null, specialization varchar(20) not null,
+ti_me time, re_view varchar(100) not null);
+
+insert into review1 values("sai","priya","cardiology",'10:00:00',
+"IT was cure easily better than previous one");
+insert into review1 values("pavan","meena","neurology",'1:00:00',
+"the doctor was performing smoothly");
+insert into review1 values("suman","geetha","babyspl",'4:00:00',
+"better treatment i got now");
+insert into review1 values("jeeva","swetha","gyaneco",'10:45:00',
+"perfect me now");
+insert into review1 values("karan","ziya","anesthia",'03:30:00',
+"nice way of treatment now");
+insert into review1 values("viswa","ruhi","bones",'12:45:00',
+" assumpted cases now");
+insert into review1 values("uday","piyu","psychology",'02:50:00',
+" perfect treatment now i had good health");
+
+select * from review1;
+
+
+
+
+
+===========================================================================================================================
+
+create table Contact_Table(id  int primary key not null,email varchar(20) not null,
+fname varchar(30) not null,lname varchar(30) not null,
+company varchar(20) not null,Active_flag int,opt_out int);
+
+select * FROM Contact_Table;
+
+INSERT INTO Contact_Table VALUES (123,"a@a.com","kian","Seth","ABC",1,1);
+INSERT INTO Contact_Table VALUES (133,"b@b.com","Neha","Seth","ABC",1,0);
+INSERT INTO Contact_Table VALUES (234,"c@c.com","Puru","Malik","CDF",0,0);
+INSERT INTO Contact_Table VALUES (342,"d@d.com","Sid","Maan","TEG",1,0);
+
+
+select * from contact_table where Active_flag=1;
+
+delete from contact_table where company="ABC";
+
+delete  from contact_table where opt_out=1;
+
+INSERT INTO Contact_Table VALUES (658,"mili@gmail.com","mili","Maan","DGH",1,1);
+
+SELECT COUNT(company),company FROM Contact_table GROUP BY company having count(company) <=1;
+
+UPDATE contact_table SET fname = "niti" WHERE id= 658;
+
+CREATE TABLE  CUSTOMER (cus_ID INT PRIMARY KEY, cus_NAME VARCHAR(30),CITY VARCHAR(20),GRADE INT ,SALESMAN_ID INT);
+
+INSERT INTO CUSTOMER VALUES (3002,'Nick Rimando','New York',100,5001);
+INSERT INTO CUSTOMER VALUES (3007,'Brad Davis','New York',200,5001),
+(3005,'Graham Zusi','California',200,5002),
+(3008,'Julian Green','London',300,5002),
+(3004,'Fabian Johnson','Paris',300,5006),
+(3009,'Goeff Cameron','Berlin',100,5003),
+(3003,'Jozy Altidor','Moscow',200,5007),
+(3001,'Brad Guzan','London',null ,5005);
+===========================================================================================================================================
+SELECT * FROM CUSTOMER;
+
+create table salesman(salesman_id int primary key not null ,name varchar(20), city varchar(20), commission float);
+
+insert into salesman values(5001,"james Hoog","New yark",0.15);
+insert into salesman values(5002,"nail Knite","paris",0.13);
+insert into salesman values(5005,"pit Alex","londan",0.11);
+insert into salesman values(5006,"Mc Lyon","paris",0.14);
+insert into salesman values(5007,"Paul Adam","rome",0.13);
+insert into salesman values(5003,"Lauson Hen","san jose",0.12);
+
+select *from salesman;
+
+ select cus_name,grade,c.city as customer_city,name as salesman,s.city as salesman_city 
+from customer c,salesman s where grade<100 order by cus_ID asc;
