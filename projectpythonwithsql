@@ -7,40 +7,42 @@ import mysql.connector
 mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808')
 print(mydb.connection_id)
 cur=mydb.cursor()
-cur.execute('create database Inventory_control')
+cur.execute('create database Inventory_management')
 ========create table===========
 import mysql.connector
-mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_control')
+mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_management')
 cur=mydb.cursor()
 a='create table manufacture(mfd_id integer(5),item_name varchar(20),number_items integer(10), defective_item integer(10))'
-b='create table good1(good_id integer(5),item_name varchar(20),mfd_date integer(10),company_name varchar(20),color varchar(20))'
+b='create table good1(good_id integer(5),item_name varchar(20),mfd_date Date,company_name varchar(20),color varchar(20))'
 
-c='create table ph1(purch_id integer(5),item_name varchar(20),purch_amount integer(10),purch_date integer(20),S_name varchar(20))'
+c='create table ph1(purch_id integer(5),item_name varchar(20),purch_amount integer(10),purch_date Date,S_name varchar(20))'
 
 d='create table sale1(sale_id integer(5),Store_name varchar(20),item_name varchar(20),profit_margin integer(20))'
-
 
 cur.execute(a)
 cur.execute(b)
 cur.execute(c)
 cur.execute(d)
 ===============insert db======================
+
 import mysql.connector
-mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_control')
+mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_management')
 cur=mydb.cursor()
 a='insert into manufacture(mfd_id,item_name,number_items,defective_item) values(%s,%s,%s,%s)'
-z=[(101,"wooden table",80,9),(102,'car',90,10)]
+z=[(101,"wooden table",80,9),(102,'car',90,10),(103,'perfume',50,3),(104,"Lipbalm",60,2)]
 cur.executemany(a,z)
-b='insert into  good1(good_id,item_name,mfd_date,company_name,color) values(%s,%s,%s,%s)'
-y=[(201,"car","23-04-01","SS Export","red"),(202,"material","23-05-10","TEM","blue")]
+mydb.commit()
+b='insert into  good1(good_id,item_name,mfd_date,company_name,color) values(%s,%s,%s,%s,%s)'
+y=[(201,"car","23-04-01","SS Export","red"),(202,"material","23-05-10","TEM","blue"),(203,"wooden table","24-05-03","EVoo","PINK"),(204,"bed mates","23-04-30","TAR","Violet")]
 cur.executemany(b,y)
+mydb.commit()
 c='insert into  ph1(purch_id,item_name,purch_amount,purch_date,s_name) values(%s,%s,%s,%s,%s)'
-t=[(301,"car","23-04-01","SS Export","red"),(202,"material","23-05-10","TEM","blue")]
-cur.executemany(b,t)
-b='insert into  sale1(sale_id,store_name,item_name,mfd_date,profit_name) values(%s,%s,%s,%s)'
-s=[(401,"MyKids","wooden table","23-04-01",1000),(402,"MyCare","toy","23-05-10",1500)]
-cur.executemany(b,s)
-
+t=[(301,"car",5000,"23-04-01","SS Export"),(302,"material",10000,"23-05-10","TEM"),(303,"wooden chair",5000,"23-04-28","Mykids"),(304,"rose water",800,"23-05-15","Myoro")]
+cur.executemany(c,t)
+mydb.commit()
+d='insert into  sale1(sale_id,store_name,item_name,profit_margin) values(%s,%s,%s,%s)'
+s=[(401,"MyKids","wooden table",1000),(402,"MyCare","toy",1500),(403,"Myoro","pencil",450),(404,"Mykids","jam",280)]
+cur.executemany(d,s)
 mydb.commit()
 print('Data inserted succesfully')
 
@@ -80,6 +82,38 @@ for x in dis:
     print(x)
 
 
+===============================query============================
+import mysql.connector
+mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_management')
+cur=mydb.cursor()
+x='update good1 g, manufacture m set mfd_id = 102,number_items=90,m.item_name="car",defective_item=10 where m.item_name="car" AND g.item_name="car" AND g.color="red"'
+cur.execute(x)
+mydb.commit()
+========================================q2==============================
+import mysql.connector
+mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_management')
+cur=mydb.cursor()
+f='select profit_margin from sale1 s join good1 g on s.item_name=g.item_name where s.item_name="wooden table" And store_name="MyKids"'
+cur.execute(f)
+dis=cur.fetchall()
+for x in dis:
+    print(x)
+======================================q3===========================
+import mysql.connector
+mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_management')
+cur=mydb.cursor()
+f='select number_items from manufacture m join good1 g on g.item_name=m.item_name where m.item_name="wooden table" and g.mfd_date="24-05-03"'
+cur.execute(f)
+dis=cur.fetchall()
+for x in dis:
+    print(x)
+=========================================q4=========================================
+import mysql.connector
+mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_management')
+cur=mydb.cursor()
+x='DELETE manufacture ,ph1 from ph1 join manufacture.item_name=ph1.item_name where manufacture.defective_item = 3'
+cur.execute(x)
+mydb.commit()
 
 
 
