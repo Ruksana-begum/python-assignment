@@ -47,40 +47,6 @@ mydb.commit()
 print('Data inserted succesfully')
 
 
-================update=========================
-import mysql.connector
-mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_control')
-cur=mydb.cursor()
-x='update good1 g,mfd1 m set mfd_id=101,no_of_items=80,m.item_name="motor bell",defective_items=3 where m.item_name="Toys" AND g.item_name="Toys" AND g.color="Red"'
-cur.execute(x)
-mydb.commit()
-================================delete=============
-import mysql.connector
-mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_control')
-cur=mydb.cursor()
-f='delete from manufacture where item_name="motor bell" and decfective_item=3'
-cur.execute(f)
-mydb.commit()
-======================query======================
-import mysql.connector
-mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_control')
-cur=mydb.cursor()
-f='select profit_margin from Sale1 s join good1 g on s.item_name=g.product where s.item_name="wooden table" AND store="MyCare" And company="SS Export"'
-cur.execute(f)
-dis=cur.fetchall()
-for x in dis:_datd
-    print(x)
-    =========================query============================
-
-import mysql.connector
-mydb=mysql.connector.connect(host='localhost',user='root',password='Ameena&2808',database='Inventory_control')
-cur=mydb.cursor()
-f='select number_items from Manufacture m join good1 g on g.item_name=m.item_name where m.item_name="wooden table" AND g.mfd_date="23-04-01"'
-cur.execute(f)
-dis=cur.fetchall()
-for x in dis:
-    print(x)
-
 
 ===============================query============================
 import mysql.connector
